@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StyleAI – AI Fashion Styling Advisor</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>👗 StyleAI</h1>
+    <p class="subtitle">
+        AI-Powered Fashion Styling Advisor based on Skin Tone & Gender
+    </p>
+
+    <!-- Upload Form -->
+    <form method="POST" enctype="multipart/form-data" class="card">
+        <label>👤 Select Gender</label>
+        <select name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+        <label>📷 Upload Your Photo</label>
+        <input type="file" name="photo" accept="image/*" required>
+
+        <button type="submit">✨ Get Style Recommendation</button>
+    </form>
+
+    <!-- Results Section -->
+    {% if skin_tone %}
+    <div class="results card">
+        <h2>🧠 AI Analysis Result</h2>
+
+        <p><strong>Detected Skin Tone:</strong> {{ skin_tone }}</p>
+        <p><strong>Recommended Outfit:</strong> {{ recommendation.outfit }}</p>
+        <p><strong>Accessory Suggestions:</strong> {{ recommendation.accessories }}</p>
+
+        <h3>🛒 Curated Shopping Links</h3>
+        <div class="links">
+            <a href="{{ recommendation.shopping.Amazon }}" target="_blank">Amazon</a>
+            <a href="{{ recommendation.shopping.Flipkart }}" target="_blank">Flipkart</a>
+            <a href="{{ recommendation.shopping.Zara }}" target="_blank">Zara</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="card" style="text-align:center; color:#777;">
+        👆 Upload a photo and select gender to get your AI fashion recommendation!
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
